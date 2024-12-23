@@ -266,5 +266,63 @@ int main() {
 
 
 
+#include <stdio.h>
+#include <unistd.h>
+#include <limits.h>
+
+int main() {
+    // i. Number of clock ticks
+    long clock_ticks = sysconf(_SC_CLK_TCK);
+    if (clock_ticks == -1) {
+        perror("Failed to get clock ticks");
+    } else {
+        printf("i. Number of clock ticks per second: %ld\n", clock_ticks);
+    }
+
+    // ii. Maximum path length
+    long path_max = pathconf("/", _PC_PATH_MAX);
+    if (path_max == -1) {
+        perror("Failed to get maximum path length");
+    } else {
+        printf("ii. Maximum path length: %ld\n", path_max);
+    }
+
+    // iii. Maximum number of child processes
+    long max_child_procs = sysconf(_SC_CHILD_MAX);
+    if (max_child_procs == -1) {
+        perror("Failed to get maximum number of child processes");
+    } else {
+        printf("iii. Maximum number of child processes: %ld\n", max_child_procs);
+    }
+
+    // iv. Maximum number of characters in a file name
+    long name_max = pathconf("/", _PC_NAME_MAX);
+    if (name_max == -1) {
+        perror("Failed to get maximum file name length");
+    } else {
+        printf("iv. Maximum number of characters in a file name: %ld\n", name_max);
+    }
+
+    // v. Maximum number of open files per process
+    long max_open_files = sysconf(_SC_OPEN_MAX);
+    if (max_open_files == -1) {
+        perror("Failed to get maximum number of open files per process");
+    } else {
+        printf("v. Maximum number of open files per process: %ld\n", max_open_files);
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
